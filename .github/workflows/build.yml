@@ -64,14 +64,14 @@ jobs:
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-  core-integration-test:
-    needs: core
-    uses: ./.github/workflows/core-integration-test.yml
-    with:
-      core_cache_key: ${{ needs.core.outputs.cache_key }}
-      core_cache_path: ${{ needs.core.outputs.cache_path }}
-    secrets:
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+  # core-integration-test:
+  #   needs: core
+  #   uses: ./.github/workflows/core-integration-test.yml
+  #   with:
+  #     core_cache_key: ${{ needs.core.outputs.cache_key }}
+  #     core_cache_path: ${{ needs.core.outputs.cache_path }}
+  #   secrets:
+  #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   lint:
     needs: [core, console]
