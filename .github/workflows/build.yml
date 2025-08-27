@@ -91,7 +91,7 @@ jobs:
       packages: write
     if: ${{ github.event_name == 'workflow_dispatch' }}
     with:
-      build_image_name: "ghcr.io/zitadel/zitadel-build"
+      build_image_name: "ghcr.io/tualua/zitadel-build"
 
   login-container:
     uses: ./.github/workflows/login-container.yml
@@ -99,7 +99,7 @@ jobs:
       packages: write
       id-token: write
     with:
-      login_build_image_name: "ghcr.io/zitadel/zitadel-login-build"
+      login_build_image_name: "ghcr.io/tualua/zitadel-login-build"
       node_version: "20"
 
   login-integration-test:
@@ -132,14 +132,11 @@ jobs:
       ]
     if: ${{ github.event_name == 'workflow_dispatch' }}
     secrets:
-      GCR_JSON_KEY_BASE64: ${{ secrets.GCR_JSON_KEY_BASE64 }}
       APP_ID: ${{ secrets.APP_ID }}
       APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
     with:
       build_image_name: ${{ needs.container.outputs.build_image }}
       semantic_version: "23.0.7"
-      image_name: "ghcr.io/zitadel/zitadel"
-      google_image_name: "europe-docker.pkg.dev/zitadel-common/zitadel-repo/zitadel"
+      image_name: "ghcr.io/tualua/zitadel"
       build_image_name_login: ${{ needs.login-container.outputs.login_build_image }}
-      image_name_login: "ghcr.io/zitadel/zitadel-login"
-      google_image_name_login: "europe-docker.pkg.dev/zitadel-common/zitadel-repo/zitadel-login"
+      image_name_login: "ghcr.io/tualua/zitadel-login"

@@ -12,22 +12,13 @@ on:
       image_name:
         required: true
         type: string
-      google_image_name:
-        required: true
-        type: string
       build_image_name_login:
         required: true
         type: string
       image_name_login:
         required: true
         type: string
-      google_image_name_login:
-        required: true
-        type: string
     secrets:
-      GCR_JSON_KEY_BASE64:
-        description: 'base64 endcrypted key to connect to Google'
-        required: true
       APP_ID:
         description: 'GH App ID to request token for homebrew update'
         required: true
@@ -103,13 +94,7 @@ jobs:
           --tag ${{ inputs.image_name }}:${{ needs.version.outputs.version }}-debug \
           ${{ inputs.build_image_name }}-debug        
         docker buildx imagetools create \
-          --tag ${{ inputs.google_image_name }}:${{ needs.version.outputs.version }} \
-          ${{ inputs.build_image_name }}
-        docker buildx imagetools create \
           --tag ${{ inputs.image_name_login }}:${{ needs.version.outputs.version }} \
-          ${{ inputs.build_image_name_login }}
-        docker buildx imagetools create \
-          --tag ${{ inputs.google_image_name_login }}:${{ needs.version.outputs.version }} \
           ${{ inputs.build_image_name_login }}
     -
       name: Publish latest
